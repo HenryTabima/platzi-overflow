@@ -1,0 +1,18 @@
+{
+  "name": "platzi_overflow",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "Henry Tabima Giraldo <henrytabima.dev@gmail.com> (https://henrytabima.com)",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.18.4"
+  },
+  "dependencies": {
+    "hapi": "^17.6.0"
+  }
+}
