@@ -25,6 +25,7 @@ const server = hapi.server({
 async function init () {
   try {
     await server.register(inert)
+
     server.route({
       method: 'GET',
       path: '/home',

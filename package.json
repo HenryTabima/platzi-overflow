@@ -1,8 +1,12 @@
 {
   "name": "platzi_overflow",
   "version": "1.0.0",
-  "description": "",
+  "description": "Projecto del curso de hapi js en platzi (stackoverflow like)",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:HenryTabima/platzi-overflow.git"
+  },
   "scripts": {
     "dev": "nodemon index.js"
   },
@@ -13,6 +17,7 @@
     "nodemon": "^1.18.4"
   },
   "dependencies": {
-    "hapi": "^17.6.0"
+    "hapi": "^17.6.0",
+    "inert": "^5.1.0"
   }
 }
