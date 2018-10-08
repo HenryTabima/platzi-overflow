@@ -25,7 +25,7 @@ async function init () {
   })
 
   try {
-    await server.start
+    await server.start()
   } catch (err) {
     console.error(err)
     process.exit(1)
