@@ -8,7 +8,7 @@
     "url": "git@github.com:HenryTabima/platzi-overflow.git"
   },
   "scripts": {
-    "dev": "nodemon index.js"
+    "dev": "nodemon --ext js,hbs"
   },
   "keywords": [],
   "author": "Henry Tabima Giraldo <henrytabima.dev@gmail.com> (https://henrytabima.com)",
@@ -17,7 +17,9 @@
     "nodemon": "^1.18.4"
   },
   "dependencies": {
+    "handlebars": "^4.0.12",
     "hapi": "^17.6.0",
-    "inert": "^5.1.0"
+    "inert": "^5.1.0",
+    "vision": "^5.4.0"
   }
 }
