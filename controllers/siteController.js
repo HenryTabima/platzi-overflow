@@ -21,6 +21,13 @@ function login (req, h) {
   })
 }
 
+function ask (req, h) {
+  return h.view('ask', {
+    title: 'Crear pregunta',
+    user: req.state.user
+  })
+}
+
 function notFound (req, h) {
   return h.view('404', {}, {
     layout: 'error-layout'
@@ -43,5 +50,6 @@ module.exports = {
   home,
   login,
   notFound,
-  fileNotFound
+  fileNotFound,
+  ask
 }

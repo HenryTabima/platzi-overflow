@@ -1,8 +1,8 @@
 'use strict'
 
 const Joi = require('joi')
-const siteController = require('./controllers/site')
-const userController = require('./controllers/user')
+const siteController = require('./controllers/siteController')
+const userController = require('./controllers/usersController')
 
 module.exports = [
   {
@@ -24,6 +24,11 @@ module.exports = [
     method: 'GET',
     path: '/logout',
     handler: userController.logout
+  },
+  {
+    method: 'GET',
+    path: '/ask',
+    handler: siteController.ask
   },
   {
     method: 'POST',

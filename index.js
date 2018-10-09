@@ -12,7 +12,7 @@ const inert = require('inert')
 const vision = require('vision')
 const path = require('path')
 const routes = require('./routes')
-const siteController = require('./controllers/site')
+const siteController = require('./controllers/siteController')
 
 // Server instatiation
 const server = hapi.server({
