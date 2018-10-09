@@ -33,7 +33,8 @@ module.exports = [
         payload: {
           email: Joi.string().email().required(),
           password: Joi.string().required().min(6)
-        }
+        },
+        failAction: userController.failValidation
       }
     },
     handler: userController.validateUser
@@ -47,7 +48,8 @@ module.exports = [
           name: Joi.string().required().min(3),
           email: Joi.string().email().required(),
           password: Joi.string().required().min(6)
-        }
+        },
+        failAction: userController.failValidation
       }
     },
     handler: userController.createUser
