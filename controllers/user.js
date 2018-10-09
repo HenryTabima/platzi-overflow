@@ -9,25 +9,38 @@ async function createUser (req, h) {
     result = await users.create(req.payload)
   } catch (error) {
     console.error(error)
-    return h.response('Problemas creando el usuario').code(500)
+    return h.view('register', {
+      title: 'Registro',
+      error: 'Error creando el usuario'
+    })
   }
 
-  return h.response(`Usuario creado ID: ${result}`)
-}
+  return h.view('register', {
+    title: 'Registro',
+    success: 'Usuario creado exitosamente'
+  })}
 
 async function validateUser (req, h) {
   let result
   try {
     result = await users.validate(req.payload)
     if (!result) {
-      return h.response('Email y/o contraseña incorrecta').code(401)
+      return h.view('login', {
+        title: 'Login',
+        error: 'Email y/o contraseña incorrecta'
+      })
     }
   } catch (error) {
     console.error(error)
-    return h.response('Problemas validando el usuario').code(500)
+    return h.view('login', {
+      title: 'Login',
+      error: 'Problemas validando el usuario'
+    })
   }
 
-  return h.redirect('/').state('user', {
+  return h.redirect('/', {
+    title: 'Home'
+  }).state('user', {
     name: result.name,
     email: result.email
   })
