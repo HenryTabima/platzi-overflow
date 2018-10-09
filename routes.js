@@ -16,7 +16,26 @@ module.exports = [
     handler: siteController.register
   },
   {
+    method: 'GET',
+    path: '/login',
+    handler: siteController.login
+  },
+  {
     method: 'POST',
+    path: '/validate-user',
+    options: {
+      validate: {
+        payload: {
+          email: Joi.string().email().required(),
+          password: Joi.string().required().min(6)
+        }
+      }
+    },
+    handler: userController.validateUser
+  },
+  {
+    method: 'POST',
+    path: '/create-user',
     options: {
       validate: {
         payload: {
@@ -26,7 +45,6 @@ module.exports = [
         }
       }
     },
-    path: '/create-user',
     handler: userController.createUser
   },
   {
