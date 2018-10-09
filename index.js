@@ -48,7 +48,7 @@ async function init () {
     process.exit(1)
   }
 
-  console.log(`Servidor lanzado en: ${server.info.uri}`)
+  console.log('\x1b[32m', `Servidor lanzado en: ${server.info.uri}`)
 }
 
 init()

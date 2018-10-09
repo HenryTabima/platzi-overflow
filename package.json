@@ -17,6 +17,8 @@
     "nodemon": "^1.18.4"
   },
   "dependencies": {
+    "bcrypt": "^3.0.1",
+    "firebase-admin": "^6.0.0",
     "handlebars": "^4.0.12",
     "hapi": "^17.6.0",
     "inert": "^5.1.0",
