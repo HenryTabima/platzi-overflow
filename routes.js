@@ -2,7 +2,8 @@
 
 const Joi = require('joi')
 const siteController = require('./controllers/siteController')
-const userController = require('./controllers/usersController')
+const usersController = require('./controllers/usersController')
+const questionsController = require('./controllers/questionsController')
 
 module.exports = [
   {
@@ -23,7 +24,7 @@ module.exports = [
   {
     method: 'GET',
     path: '/logout',
-    handler: userController.logout
+    handler: usersController.logout
   },
   {
     method: 'GET',
@@ -39,10 +40,10 @@ module.exports = [
           email: Joi.string().email().required(),
           password: Joi.string().required().min(6)
         },
-        failAction: userController.failValidation
+        failAction: usersController.failValidation
       }
     },
-    handler: userController.validateUser
+    handler: usersController.validateUser
   },
   {
     method: 'POST',
@@ -54,10 +55,24 @@ module.exports = [
           email: Joi.string().email().required(),
           password: Joi.string().required().min(6)
         },
-        failAction: userController.failValidation
+        failAction: usersController.failValidation
       }
     },
-    handler: userController.createUser
+    handler: usersController.createUser
+  },
+  {
+    method: 'POST',
+    path: '/create-question',
+    options: {
+      validate: {
+        payload: {
+          title: Joi.string().required(),
+          description: Joi.string().required(),
+        },
+        failAction: usersController.failValidation
+      }
+    },
+    handler: questionsController.createQuestion
   },
   {
     method: 'GET',

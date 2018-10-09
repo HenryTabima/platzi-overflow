@@ -1,6 +1,6 @@
 'use strict'
 
-const Question = require('../models/index').question
+const question = require('../models/index').question
 
 async function createQuestion (req, h) {
   let result
@@ -16,4 +16,8 @@ async function createQuestion (req, h) {
   }
 
   return h.response(`Pregunta creada con el ID ${result}`)
+}
+
+module.exports = {
+  createQuestion
 }

@@ -22,6 +22,9 @@ function login (req, h) {
 }
 
 function ask (req, h) {
+  if (!req.state.user) {
+    return h.redirect('/login')
+  }
   return h.view('ask', {
     title: 'Crear pregunta',
     user: req.state.user
