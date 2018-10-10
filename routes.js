@@ -13,7 +13,7 @@ module.exports = [
     handler: siteController.home,
     options: {
       cache: {
-        expiresIn: 1000*30,
+        expiresIn: 1000 * 30,
         privacy: 'private'
       }
     }
@@ -39,7 +39,7 @@ module.exports = [
     handler: usersController.logout,
     options: {
       pre: [
-        {method: middlewares.isAuth}
+        { method: middlewares.isAuth }
       ]
     }
   },
@@ -49,7 +49,7 @@ module.exports = [
     handler: siteController.ask,
     options: {
       pre: [
-        {method: middlewares.isAuth}
+        { method: middlewares.isAuth }
       ]
     }
   },
@@ -86,20 +86,19 @@ module.exports = [
     method: 'POST',
     path: '/create-question',
     options: {
+      pre: [
+        { method: middlewares.isAuth }
+      ],
       validate: {
         payload: {
           title: Joi.string().required(),
           description: Joi.string().required(),
+          image: Joi.any().optional()
         },
         failAction: usersController.failValidation
       }
     },
-    handler: questionsController.createQuestion,
-    options: {
-      pre: [
-        {method: middlewares.isAuth}
-      ]
-    }
+    handler: questionsController.createQuestion
   },
   {
     method: 'POST',

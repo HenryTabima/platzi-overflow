@@ -7,8 +7,17 @@ class Question {
     this.collection = this.ref.child('questions')
   }
 
-  async create (data, user) {
-    data.owner = user
+  async create (info, user, fileName) {
+    const data = {
+      description: info.description,
+      title: info.title,
+      owner: user
+    }
+
+    if (fileName) {
+      data.fileName = fileName
+    }
+
     const question = this.collection.push()
     question.set(data)
     return question.key
@@ -28,7 +37,7 @@ class Question {
 
   async answer (data, user) {
     const answer = await this.collection.child(data.id).child('answers').push()
-    answer.set({text: data.answer, user})
+    answer.set({ text: data.answer, user })
     return answer
   }
 
@@ -37,7 +46,7 @@ class Question {
     const question = query.val()
     const answers = question.answers
 
-    if(!user.email === question.owner.email) {
+    if (!user.email === question.owner.email) {
       return false
     }
 
@@ -50,7 +59,5 @@ class Question {
     return update
   }
 }
-
-
 
 module.exports = Question
