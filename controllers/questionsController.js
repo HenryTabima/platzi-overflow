@@ -16,8 +16,9 @@ async function createQuestion (req, h) {
       await write(join(__dirname, '..', 'public', 'uploads', fileName), req.payload.image)
     }
     result = await question.create(req.payload, req.state.user, fileName)
+    req.log('info', `Respuesta creada: ${result}`)
   } catch (error) {
-    console.error(`Ocurrio un error: ${error}`)
+    req.log('error', `Ocurrio un error: ${error}`)
     return h.view('ask', {
       title: 'Crear pregunta',
       error: 'Problemas creando la pregunta'
@@ -31,21 +32,19 @@ async function answerQuestion (req, h) {
   let result
   try {
     result = await question.answer(req.payload, req.state.user)
-    console.log(`Respuesta creada: ${result}`)
+    req.log('info', `Respuesta creada: ${result}`)
   } catch (error) {
-    console.error(error)
+    req.log('error', error)
   }
 
   return h.redirect(`/question/${req.payload.id}`)
 }
 
 async function setRightAnswer (req, h) {
-  let result
   try {
-    result = await req.server.methods.setRightAnswer(req.params.questionId, req.params.answerId, req.state.user)
-    console.log(result)
+    await req.server.methods.setRightAnswer(req.params.questionId, req.params.answerId, req.state.user)
   } catch (error) {
-    console.error(error)
+    req.log('error', error)
   }
 
   return h.redirect(`/question/${req.params.questionId}`)

@@ -8,7 +8,7 @@ async function createUser (req, h) {
   try {
     result = await users.create(req.payload)
   } catch (error) {
-    console.error(error)
+    req.log('error', error)
     return h.view('register', {
       title: 'Registro',
       error: 'Error creando el usuario'
@@ -31,7 +31,7 @@ async function validateUser (req, h) {
       })
     }
   } catch (error) {
-    console.error(error)
+    req.log('error', error)
     return h.view('login', {
       title: 'Login',
       error: 'Problemas validando el usuario'
