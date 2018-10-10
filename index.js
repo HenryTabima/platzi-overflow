@@ -15,6 +15,7 @@ const vision = require('vision')
 const path = require('path')
 const routes = require('./routes')
 const siteController = require('./controllers/siteController')
+const api = require('./lib/api')
 
 // Server instatiation
 const server = hapi.server({
@@ -43,6 +44,12 @@ async function init () {
             'stdout'
           ]
         }
+      }
+    })
+    await server.register({
+      plugin: api,
+      options: {
+        prefix: 'api'
       }
     })
 
