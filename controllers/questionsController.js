@@ -18,6 +18,19 @@ async function createQuestion (req, h) {
   return h.response(`Pregunta creada con el ID ${result}`)
 }
 
+async function answerQuestion (req,h) {
+  let result
+  try {
+    result = await question.answer(req.payload, req.state.user)
+    console.log(`Respuesta creada: ${result}`)
+  } catch (error) {
+    console.error(error)
+  }
+
+  return h.redirect(`/question/${req.payload.id}`)
+}
+
 module.exports = {
-  createQuestion
+  createQuestion,
+  answerQuestion
 }

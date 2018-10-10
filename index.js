@@ -14,6 +14,11 @@ const path = require('path')
 const routes = require('./routes')
 const siteController = require('./controllers/siteController')
 
+handlebars.registerHelper('answerNumber', (answer) => {
+  const key = Object.keys(answer)
+  return key.length
+})
+
 // Server instatiation
 const server = hapi.server({
   port: process.env.PORT || 3000,

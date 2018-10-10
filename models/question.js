@@ -11,7 +11,6 @@ class Question {
     data.owner = user
     const question = this.collection.push()
     question.set(data)
-
     return question.key
   }
 
@@ -26,6 +25,14 @@ class Question {
     const data = query.val()
     return data
   }
+
+  async answer (data, user) {
+    const answer = await this.collection.child(data.id).child('answers').push()
+    answer.set({text: data.answer, user})
+    return answer
+  }
 }
+
+
 
 module.exports = Question
