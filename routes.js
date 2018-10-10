@@ -1,6 +1,7 @@
 'use strict'
 
 const Joi = require('joi')
+const middlewares = require('./lib/middlewares')
 const siteController = require('./controllers/siteController')
 const usersController = require('./controllers/usersController')
 const questionsController = require('./controllers/questionsController')
@@ -24,17 +25,32 @@ module.exports = [
   {
     method: 'GET',
     path: '/question/{id}',
-    handler: siteController.showQuestion
+    handler: siteController.showQuestion,
+    options: {
+      pre: [
+        {method: middlewares.isAuth}
+      ]
+    }
   },
   {
     method: 'GET',
     path: '/logout',
-    handler: usersController.logout
+    handler: usersController.logout,
+    options: {
+      pre: [
+        {method: middlewares.isAuth}
+      ]
+    }
   },
   {
     method: 'GET',
     path: '/ask',
-    handler: siteController.ask
+    handler: siteController.ask,
+    options: {
+      pre: [
+        {method: middlewares.isAuth}
+      ]
+    }
   },
   {
     method: 'POST',
@@ -77,7 +93,12 @@ module.exports = [
         failAction: usersController.failValidation
       }
     },
-    handler: questionsController.createQuestion
+    handler: questionsController.createQuestion,
+    options: {
+      pre: [
+        {method: middlewares.isAuth}
+      ]
+    }
   },
   {
     method: 'POST',
@@ -91,7 +112,22 @@ module.exports = [
         failAction: usersController.failValidation
       }
     },
-    handler: questionsController.answerQuestion
+    handler: questionsController.answerQuestion,
+    options: {
+      pre: [
+        {method: middlewares.isAuth}
+      ]
+    }
+  },
+  {
+    method: 'GET',
+    path: '/answer/{questionId}/{answerId}',
+    handler: questionsController.setRightAnswer,
+    options: {
+      pre: [
+        {method: middlewares.isAuth}
+      ]
+    }
   },
   {
     method: 'GET',
