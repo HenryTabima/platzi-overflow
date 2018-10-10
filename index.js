@@ -7,17 +7,12 @@
 
 // Dependencies
 const hapi = require('hapi')
-const handlebars = require('handlebars')
+const handlebars = require('./lib/helpers')
 const inert = require('inert')
 const vision = require('vision')
 const path = require('path')
 const routes = require('./routes')
 const siteController = require('./controllers/siteController')
-
-handlebars.registerHelper('answerNumber', (answer) => {
-  const key = Object.keys(answer)
-  return key.length
-})
 
 // Server instatiation
 const server = hapi.server({
