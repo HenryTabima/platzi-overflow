@@ -24,6 +24,7 @@
     "good-console": "^7.1.0",
     "handlebars": "^4.0.12",
     "hapi": "^17.6.0",
+    "hapi-auth-basic": "^5.0.0",
     "inert": "^5.1.0",
     "joi": "^13.7.0",
     "uuid": "^3.3.2",
