@@ -10,7 +10,13 @@ module.exports = [
   {
     method: 'GET',
     path: '/',
-    handler: siteController.home
+    handler: siteController.home,
+    options: {
+      cache: {
+        expiresIn: 1000*30,
+        privacy: 'private'
+      }
+    }
   },
   {
     method: 'GET',
