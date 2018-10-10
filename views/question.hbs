@@ -1,12 +1,12 @@
 <div class="container mt-4">
-  <div class="alert alert-primary" role="alert">
-    <h4 class="alert-heading">{{question.title}}</h4>
-    <p>{{question.description}}</p>
-    <p class="mb-0">Creada por <strong>{{question.owner.name}}</strong></p>
-  </div>
+<div class="alert alert-primary" role="alert">
+  <h4 class="alert-heading">{{question.title}}</h4>
+  <p>{{question.description}}</p>
+  <p class="mb-0">Creada por <strong>{{question.owner.name}}</strong></p>
+</div>
 
-  {{#each question.answers as |answer key|}}
-  <div class="alert alert-info" role="alert">
+{{#each question.answers as |answer key|}}
+  <div class="alert {{#if answer.correct}}alert-success{{else}}alert-info{{/if}}" role="alert">
     <p>{{answer.text}}</p>
     <hr>
     <div class="container">
@@ -15,17 +15,22 @@
           Creada por <strong>{{answer.user.name}}</strong>
         </div>
         <div class="col-sm text-right">
-          {{#with user}}
-            {{#ifEquals ../../question.owner.email ../../user.email}}
-              <a href="" class="btn btn-primary" role="buttom">Elegir respuesta correcta</a>
-            {{/ifEquals}}
-          {{/with}}
+          {{#if answer.correct}}
+            <h3><span class="badge badge-success">Respuesta correcta</span></h3>
+          {{else}}
+            {{#with user}}
+              {{#ifEquals ../../question.owner.email ../../user.email}}
+                <a href="/answer/{{../../../key}}/{{key}}" class="btn btn-primary" role="buttom">Elegir respuesta correcta</a>
+              {{/ifEquals}}
+            {{/with}}
+          {{/if}}
         </div>
       </div>
     </div>
   </div>
-  {{/each}}
+{{/each}}
 
+{{#if user}}
   <div class="card mb-3">
     <div class="card-header">
       <h3>Responder</h3>
@@ -47,3 +52,6 @@
       </div>
     </div>
   </div>
+{{else}}
+  <p class="text-center mt-5"><a href="/login" class="btn btn-primary" role="button">Ingrese para responder</a></p>
+{{/if}}

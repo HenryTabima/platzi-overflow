@@ -9,6 +9,7 @@
 const hapi = require('hapi')
 const handlebars = require('./lib/helpers')
 const inert = require('inert')
+const methods = require('./lib/methods')
 const vision = require('vision')
 const path = require('path')
 const routes = require('./routes')
@@ -30,6 +31,8 @@ async function init () {
   try {
     await server.register(inert)
     await server.register(vision)
+
+    server.method('setRightAnswer', methods.setRightAnswer)
 
     server.state('user', {
       ttl: 1000 * 60 * 60 * 24 * 7,

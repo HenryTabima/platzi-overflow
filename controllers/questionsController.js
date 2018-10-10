@@ -15,7 +15,7 @@ async function createQuestion (req, h) {
     }).code(500).takeover()
   }
 
-  return h.response(`Pregunta creada con el ID ${result}`)
+  return h.redirect(`/question/${result}`)
 }
 
 async function answerQuestion (req,h) {
@@ -30,7 +30,20 @@ async function answerQuestion (req,h) {
   return h.redirect(`/question/${req.payload.id}`)
 }
 
+async function setRightAnswer (req, h) {
+  let result
+  try {
+    result = await req.server.methods.setRightAnswer(req.params.questionId, req.params.answerId, req.state.user)
+    console.log(result)
+  } catch (error) {
+    console.error(error)
+  }
+
+  return h.redirect(`/question/${req.params.questionId}`)
+}
+
 module.exports = {
   createQuestion,
-  answerQuestion
+  answerQuestion,
+  setRightAnswer
 }

@@ -25,12 +25,7 @@ module.exports = [
   {
     method: 'GET',
     path: '/question/{id}',
-    handler: siteController.showQuestion,
-    options: {
-      pre: [
-        {method: middlewares.isAuth}
-      ]
-    }
+    handler: siteController.showQuestion
   },
   {
     method: 'GET',
