@@ -23,6 +23,11 @@ module.exports = [
   },
   {
     method: 'GET',
+    path: '/question/{id}',
+    handler: siteController.showQuestion
+  },
+  {
+    method: 'GET',
     path: '/logout',
     handler: usersController.logout
   },
