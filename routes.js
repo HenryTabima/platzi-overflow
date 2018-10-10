@@ -104,20 +104,18 @@ module.exports = [
     method: 'POST',
     path: '/answer-question',
     options: {
+      pre: [{
+        method: middlewares.isAuth
+      }],
       validate: {
         payload: {
           answer: Joi.string().required(),
-          id: Joi.string().required(),
+          id: Joi.string().required()
         },
         failAction: usersController.failValidation
       }
     },
-    handler: questionsController.answerQuestion,
-    options: {
-      pre: [
-        {method: middlewares.isAuth}
-      ]
-    }
+    handler: questionsController.answerQuestion
   },
   {
     method: 'GET',
@@ -125,7 +123,7 @@ module.exports = [
     handler: questionsController.setRightAnswer,
     options: {
       pre: [
-        {method: middlewares.isAuth}
+        { method: middlewares.isAuth }
       ]
     }
   },

@@ -1,12 +1,10 @@
 'use strict'
 
 const users = require('../models/index').user
-const Boom = require('boom')
 
 async function createUser (req, h) {
-  let result
   try {
-    result = await users.create(req.payload)
+    await users.create(req.payload)
   } catch (error) {
     req.log('error', error)
     return h.view('register', {
@@ -18,7 +16,8 @@ async function createUser (req, h) {
   return h.view('register', {
     title: 'Registro',
     success: 'Usuario creado exitosamente'
-  })}
+  })
+}
 
 async function validateUser (req, h) {
   let result
