@@ -7,6 +7,8 @@
 
 // Dependencies
 const hapi = require('hapi')
+const blankie = require('blankie')
+const scooter = require('scooter')
 const crumb = require('crumb')
 const handlebars = require('./lib/helpers')
 const inert = require('inert')
@@ -56,6 +58,17 @@ async function init () {
         }
       }
     })
+
+    await server.register([scooter, {
+      plugin: blankie,
+      options: {
+        defaultSrc: `'self' 'unsafe-inline'`,
+        styleSrc: `'self' 'unsafe-inline' https://maxcdn.bootstrapcdn.com`,
+        fontSrc: `'self' 'unsafe-inline' data:`,
+        scriptSrc: `'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://maxcdn.bootstrapcdn.com/ https://code.jquery.com/`,
+        generateNonces: false
+      }
+    }])
 
     await server.register({
       plugin: api,
