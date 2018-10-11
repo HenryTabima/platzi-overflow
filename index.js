@@ -7,6 +7,7 @@
 
 // Dependencies
 const hapi = require('hapi')
+const crumb = require('crumb')
 const handlebars = require('./lib/helpers')
 const inert = require('inert')
 const good = require('good')
@@ -46,6 +47,16 @@ async function init () {
         }
       }
     })
+
+    await server.register({
+      plugin: crumb,
+      options: {
+        cookieOptions: {
+          isSecure: process.env.NODE_ENV === 'prod'
+        }
+      }
+    })
+
     await server.register({
       plugin: api,
       options: {
