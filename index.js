@@ -10,6 +10,7 @@ const hapi = require('hapi')
 const blankie = require('blankie')
 const scooter = require('scooter')
 const crumb = require('crumb')
+const hapiDevErrors = require('hapi-dev-errors')
 const handlebars = require('./lib/helpers')
 const inert = require('inert')
 const good = require('good')
@@ -69,6 +70,13 @@ async function init () {
         generateNonces: false
       }
     }])
+
+    await server.register({
+      plugin: hapiDevErrors,
+      options: {
+        showErrors: process.env.NODE_ENV !== 'prod'
+      }
+    })
 
     await server.register({
       plugin: api,
